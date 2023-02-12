@@ -1,3 +1,8 @@
 # BS Engine
 
-Uh I hope I actually make this work. For now WIP.
+## WIP
+
+This is a 3d engine I am creating for learning experience and future use.
+So far:
+* Vertex and Index Buffers
+* Textures
