@@ -9,3 +9,4 @@ So far:
 * Camera Controller
 * Instancing
 * Model Loading
+* Materials
