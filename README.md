@@ -7,3 +7,4 @@ So far:
 * Vertex and Index Buffers
 * Textures
 * Camera Controller
+* Instancing
