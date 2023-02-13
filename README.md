@@ -8,3 +8,4 @@ So far:
 * Textures
 * Camera Controller
 * Instancing
+* Model Loading
