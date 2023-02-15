@@ -299,7 +299,7 @@ impl State {
         let size = window.inner_size();
 
         let instance = wgpu::Instance::new(wgpu::InstanceDescriptor {
-           backends: wgpu::Backends::all() ,
+            backends: wgpu::Backends::all() ,
             dx12_shader_compiler: Default::default(),
         });
 
@@ -348,24 +348,24 @@ impl State {
         let diffuse_texture = texture::Texture::from_bytes(&device, &queue, diffuse_bytes, "Images/d27.png").unwrap();
 
         let texture_bind_group_layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
-           entries: &[
-               wgpu::BindGroupLayoutEntry {
-                   binding: 0,
-                   visibility: wgpu::ShaderStages::FRAGMENT,
-                   ty: wgpu::BindingType::Texture {
-                       multisampled: false,
-                       view_dimension: wgpu::TextureViewDimension::D2,
-                       sample_type: wgpu::TextureSampleType::Float {filterable: true},
-                   },
-                   count: None,
-               },
-               wgpu::BindGroupLayoutEntry {
-                   binding: 1,
-                   visibility: wgpu::ShaderStages::FRAGMENT,
-                   ty: wgpu::BindingType::Sampler(wgpu::SamplerBindingType::Filtering),
-                   count: None,
-               },
-           ],
+            entries: &[
+                wgpu::BindGroupLayoutEntry {
+                    binding: 0,
+                    visibility: wgpu::ShaderStages::FRAGMENT,
+                    ty: wgpu::BindingType::Texture {
+                        multisampled: false,
+                        view_dimension: wgpu::TextureViewDimension::D2,
+                        sample_type: wgpu::TextureSampleType::Float {filterable: true},
+                    },
+                    count: None,
+                },
+                wgpu::BindGroupLayoutEntry {
+                    binding: 1,
+                    visibility: wgpu::ShaderStages::FRAGMENT,
+                    ty: wgpu::BindingType::Sampler(wgpu::SamplerBindingType::Filtering),
+                    count: None,
+                },
+            ],
             label: Some("texture_bind_group_layout"),
         });
 
@@ -476,11 +476,11 @@ impl State {
         let camera_controller = CameraController::new(0.2);
 
         let index_buffer = device.create_buffer_init(
-          &wgpu::util::BufferInitDescriptor {
-              label: Some("Index Buffer"),
-              contents: bytemuck::cast_slice(INDICES),
-              usage: wgpu::BufferUsages::INDEX,
-          }
+            &wgpu::util::BufferInitDescriptor {
+                label: Some("Index Buffer"),
+                contents: bytemuck::cast_slice(INDICES),
+                usage: wgpu::BufferUsages::INDEX,
+            }
         );
 
         let light_uniform = LightUniform {
@@ -557,7 +557,7 @@ impl State {
 
         let light_render_pipeline = {
             let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor{
-               label: Some("Light Pipeline Layout"),
+                label: Some("Light Pipeline Layout"),
                 bind_group_layouts: &[&camera_bind_group_layout, &light_bind_group_layout],
                 push_constant_ranges: &[],
             });

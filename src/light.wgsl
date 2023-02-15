@@ -1,14 +1,6 @@
 // light.wgsl
 // Vertex shader
 
-struct Light {
-    position: vec3<f32>,
-    color: vec3<f32>,
-}
-@group(2) @binding(0)
-var<uniform> light: Light;
-
-
 struct Camera {
     view_proj: mat4x4<f32>,
 }
