@@ -14,3 +14,13 @@ So far:
 * Ambient Lighting
 * Diffuse Lighting
 * Normal Mapping
+
+## To Do
+* GUIS
+* Event Handler
+* More Clean Up
+* AA
+* Transparency
+* Shadows
+* Collision
+* Rigidbodies
