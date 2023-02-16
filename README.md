@@ -10,3 +10,7 @@ So far:
 * Instancing
 * Model Loading
 * Materials
+* Lights
+* Ambient Lighting
+* Diffuse Lighting
+* Normal Mapping
