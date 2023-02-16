@@ -6,6 +6,7 @@ mod camera;
 use model::{DrawModel, Vertex};
 use std::{iter, mem};
 use wgpu::BindGroupLayoutDescriptor;
+use wgpu::MultisampleState;
 
 use wgpu::util::DeviceExt;
 use winit::{
@@ -164,6 +165,11 @@ fn create_render_pipeline(
     shader: wgpu::ShaderModuleDescriptor,
 ) -> wgpu::RenderPipeline {
     let shader = device.create_shader_module(shader);
+    let multisampling = MultisampleState {
+        count: 1,
+        mask: 0xffffffff,
+        alpha_to_coverage_enabled: false
+    };
 
     device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
         label: Some("Render Pipeline"),
@@ -201,11 +207,7 @@ fn create_render_pipeline(
             stencil: wgpu::StencilState::default(),
             bias: wgpu::DepthBiasState::default(),
         }),
-        multisample: wgpu::MultisampleState {
-            count: 1,
-            mask: !0,
-            alpha_to_coverage_enabled: false,
-        },
+        multisample: multisampling,
         multiview: None,
     })
 }
