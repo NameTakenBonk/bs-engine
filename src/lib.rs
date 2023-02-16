@@ -298,7 +298,6 @@ struct State {
     window: Window,
     render_pipeline: wgpu::RenderPipeline,
     index_buffer: wgpu::Buffer,
-    diffuse_bind_group: wgpu::BindGroup,
     diffuse_texture: texture::Texture,
     depth_texture: texture::Texture,
     camera: Camera,
@@ -367,7 +366,7 @@ impl State {
         surface.configure(&device, &config);
 
         let diffuse_bytes = include_bytes!("Images/d27.png");
-        let diffuse_texture = texture::Texture::from_bytes(&device, &queue, diffuse_bytes, "Images/d27.png").unwrap();
+        let diffuse_texture = texture::Texture::from_bytes(&device, &queue, diffuse_bytes, "Images/d27.png", false).unwrap();
 
         let texture_bind_group_layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             entries: &[
@@ -387,26 +386,25 @@ impl State {
                     ty: wgpu::BindingType::Sampler(wgpu::SamplerBindingType::Filtering),
                     count: None,
                 },
+                wgpu::BindGroupLayoutEntry {
+                    binding: 2,
+                    visibility: wgpu::ShaderStages::FRAGMENT,
+                    ty: wgpu::BindingType::Texture {
+                        multisampled: false,
+                        sample_type: wgpu::TextureSampleType::Float { filterable: true },
+                        view_dimension: wgpu::TextureViewDimension::D2,
+                    },
+                    count: None,
+                },
+                wgpu::BindGroupLayoutEntry {
+                    binding: 3,
+                    visibility: wgpu::ShaderStages::FRAGMENT,
+                    ty: wgpu::BindingType::Sampler(wgpu::SamplerBindingType::Filtering),
+                    count: None,
+                },
             ],
             label: Some("texture_bind_group_layout"),
         });
-
-        let diffuse_bind_group = device.create_bind_group(
-            &wgpu::BindGroupDescriptor {
-                layout: &texture_bind_group_layout,
-                entries: &[
-                    wgpu::BindGroupEntry {
-                        binding: 0,
-                        resource: wgpu::BindingResource::TextureView(&diffuse_texture.view),
-                    },
-                    wgpu::BindGroupEntry {
-                        binding: 1,
-                        resource: wgpu::BindingResource::Sampler(&diffuse_texture.sampler),
-                    }
-                ],
-                label: Some("diffuse_bind_group"),
-            }
-        );
 
         let depth_texture = texture::Texture::create_depth_texture(&device, &config, "depth_texture");
 
@@ -606,7 +604,6 @@ impl State {
             size,
             render_pipeline,
             index_buffer,
-            diffuse_bind_group,
             diffuse_texture,
             depth_texture,
             camera,
