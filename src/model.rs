@@ -222,3 +222,4 @@ impl<'a, 'b> DrawLight<'b> for wgpu::RenderPass<'a>
         }
     }
 }
+
