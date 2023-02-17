@@ -17,8 +17,8 @@ So far:
 * AA
 
 ## To Do
-* GUIS
-* Event Handler
+* GUIS - Priority
+* Event Handler - Priority
 * More Clean Up
 * Transparency
 * Shadows
